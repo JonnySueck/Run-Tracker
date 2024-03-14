@@ -25,7 +25,7 @@ class LocationProvider(private val activity: AppCompatActivity) {
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(result: LocationResult) {
             val currentLocation = result.lastLocation
-            // get the recorded location and conver to LatLng
+            // get the recorded location and convert to LatLng
             val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
             // Check if there are other locations to calculate distance
             val lastLocation = locations.lastOrNull()

@@ -55,15 +55,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
-
         super.onCreate(savedInstanceState)
-
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         presenter.onViewCreated()
-
         // Handle clicks on start / stop button and start or stop tracking.
-        binding.btnStartStop.setOnClickListener{
+        binding.btnStartStop.setOnClickListener {
             if (binding.btnStartStop.text == getString(R.string.start_label)) {
                 startTracking()
                 binding.btnStartStop.setText(R.string.stop_label)
@@ -72,11 +69,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 binding.btnStartStop.setText(R.string.start_label)
             }
         }
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+            .findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
     }
 
     /**
@@ -105,12 +101,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.container.txtTime.base = SystemClock.elapsedRealtime()
         binding.container.txtTime.start()
         map.clear()
-        presenter.startTracking() // Start the timer
+        // Start the timer
+        presenter.startTracking()
     }
 
     private fun stopTracking() {
         presenter.stopTracking()
-        binding.container.txtTime.stop() // Stop the timer
+        // Stop the timer
+        binding.container.txtTime.stop()
     }
 
     @SuppressLint("MissingPermission")
